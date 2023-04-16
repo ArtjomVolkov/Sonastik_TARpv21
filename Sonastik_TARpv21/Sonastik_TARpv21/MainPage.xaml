@@ -3,34 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sonastik_TARpv21.MainPage">
 
-    <StackLayout>
-        <Label Text="Dictionary RU/ANG" FontFamily="AgentOrange.ttf#AgentOrange" FontSize="Title" Padding="30" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand"/>
-        <Label Text="Name : " x:Name="nm" FontFamily="AgentOrange.ttf#AgentOrange" Padding="30" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand"/>
-        <Grid ColumnDefinitions="1*,1*,1*,1*">
-            <Image x:Name="Insert_I" Source="insert.png" Grid.Column="0" Grid.Row="0" WidthRequest="85" HeightRequest="85" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="Insert_Dc"/>
-                </Image.GestureRecognizers>
-            </Image>
-            <Image x:Name="Start_I" Source="start.png" Grid.Column="1" Grid.Row="0" WidthRequest="85" HeightRequest="85" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="Start_Dc"/>
-                </Image.GestureRecognizers>
-            </Image>
-            <Image x:Name="Delete_I" Source="delete.png" Grid.Column="2" Grid.Row="0" WidthRequest="85" HeightRequest="85" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="Delete_Dc"/>
-                </Image.GestureRecognizers>
-            </Image>
-            <Image x:Name="Update_I" Source="update.png" Grid.Column="3" Grid.Row="0" WidthRequest="85" HeightRequest="85" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="Update_Dc"/>
-                </Image.GestureRecognizers>
-            </Image>
-        </Grid>
-        <StackLayout>
-            <Label></Label>
-        </StackLayout>
-    </StackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
+        <StackLayout Grid.Row="0" Margin="40" BackgroundColor="WhiteSmoke">
+            <Label Text="Dictionary RU/ENG" FontSize="Title" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" TextColor="Black" />
+        </StackLayout>
+        <StackLayout Grid.Row="1" Padding="30" BackgroundColor="WhiteSmoke">
+            <Grid ColumnDefinitions="1*,1*,1*">
+                <Image x:Name="Insert_I" Source="insert.png" Grid.Column="0" Grid.Row="0" WidthRequest="85" HeightRequest="85" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Insert_Dc"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image x:Name="Start_I" Source="start.png" Grid.Column="1" Grid.Row="0" WidthRequest="85" HeightRequest="85" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Start_Dc"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image x:Name="Delete_I" Source="delete.png" Grid.Column="2" Grid.Row="0" WidthRequest="85" HeightRequest="85" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Delete_Dc"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </StackLayout>
+    </Grid>
 </ContentPage>
