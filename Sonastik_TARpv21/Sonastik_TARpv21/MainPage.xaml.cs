@@ -25,74 +25,74 @@ namespace Sonastik_TARpv21
             }
         }
 
-        // обработчик события для кнопки добавления слова
+        // добавления слова
         private async void Insert_Dc(object sender, EventArgs e)
         {
-            string englishWord = await DisplayPromptAsync("Добавить слово", "Введите слово на английском языке");
-            if (englishWord == " ")
+            string eng = await DisplayPromptAsync("Добавить слово", "Введите слово на английском языке");
+            if (eng == " ")
             {
                 await DisplayAlert("Ошибка", "Нельзя так! ", "ОК");
             }
-            else if(englishWord == "")
+            else if(eng == "")
             {
                 await DisplayAlert("Ошибка", "Нельзя так! ", "ОК");
             }
-            else if (englishWord != null)
+            else if (eng != null)
             {
-                string russianWord = await DisplayPromptAsync("Добавить слово", "Введите слово на русском языке");
-                if (russianWord != null)
+                string rus = await DisplayPromptAsync("Добавить слово", "Введите слово на русском языке");
+                if (rus != null)
                 {
-                    if (!dict.ContainsKey(englishWord))
+                    if (!dict.ContainsKey(eng))
                     {
-                        dict.Add(englishWord, russianWord);
-                        await DisplayAlert("Успех", $"Слово {englishWord} добавлено в словарь", "ОК");
+                        dict.Add(eng, rus);
+                        await DisplayAlert("Успех", $"Слово {eng} добавлено в словарь", "ОК");
                     }
                     else
                     {
-                        await DisplayAlert("Ошибка", $"Слово {englishWord} уже есть в словаре", "ОК");
+                        await DisplayAlert("Ошибка", $"Слово {eng} уже есть в словаре", "ОК");
                     }
                 }
             }
         }
 
-        // обработчик события для кнопки просмотра словаря
+        // просмотр словаря
         private async void Start_Dc(object sender, EventArgs e)
         {
             if (dict.Count > 0)
             {
-                CarouselPage carouselPage = new CarouselPage();
+                CarouselPage carousel = new CarouselPage();
                 foreach (string key in dict.Keys)
                 {
-                    ContentPage contentPage = new ContentPage();
-                    Label label = new Label();
-                    label.Text = key;
-                    label.FontSize = 40;
-                    label.HorizontalOptions = LayoutOptions.Center;
-                    label.VerticalOptions = LayoutOptions.Center;
-                    label.GestureRecognizers.Add(new TapGestureRecognizer
-                    {
+                    ContentPage content = new ContentPage();
+                    Label lbl = new Label();
+                    lbl.Text = key;
+                    lbl.FontSize = 40;
+                    lbl.HorizontalOptions = LayoutOptions.Center;
+                    lbl.VerticalOptions = LayoutOptions.Center;
+                    lbl.GestureRecognizers.Add(new TapGestureRecognizer
+                    {   
                         Command = new Command(() =>
                         {
-                            string currentText = label.Text;
-                            if (dict.ContainsKey(currentText))
+                            string txt = lbl.Text;
+                            if (dict.ContainsKey(txt))
                             {
-                                label.Text = dict[currentText];
+                                lbl.Text = dict[txt];
                             }
                             else
                             {
-                                var reversedDict = dict.ToDictionary(x => x.Value, x => x.Key);
-                                if (reversedDict.ContainsKey(currentText))
+                                var reverse = dict.ToDictionary(x => x.Value, x => x.Key);
+                                if (reverse.ContainsKey(txt))
                                 {
-                                    label.Text = reversedDict[currentText];
+                                    lbl.Text = reverse[txt];
                                 }
                             }
                         })
                     });
-                    contentPage.Content = label;
-                    carouselPage.Children.Add(contentPage);
+                    content.Content = lbl;
+                    carousel.Children.Add(content);
                 }
-                carouselPage.Title = "Dictionary";
-                await Navigation.PushAsync(carouselPage);
+                carousel.Title = "Dictionary";
+                await Navigation.PushAsync(carousel);
             }
             else
             {
@@ -100,21 +100,21 @@ namespace Sonastik_TARpv21
             }
         }
 
-        // обработчик события для кнопки удаления слова
+        // удаления слова
         private async void Delete_Dc(object sender, EventArgs e)
         {
-            string englishWord = await DisplayPromptAsync("Удалить слово", "Введите слово на английском языке");
-            if (englishWord != null)
+            string eng = await DisplayPromptAsync("Удалить слово", "Введите слово на английском языке");
+            if (eng != null)
             {
-                if (dict.ContainsKey(englishWord))
+                if (dict.ContainsKey(eng))
                 {
-                    dict.Remove(englishWord);
-                    await DisplayAlert("Успех", $"Слово {englishWord} удалено из словаря", "ОК");
+                    dict.Remove(eng);
+                    await DisplayAlert("Успех", $"Слово {eng} удалено из словаря", "ОК");
                 }
                 else
                 {
-                    await DisplayAlert("Ошибка", $"Слово {englishWord} не найдено в словаре", "ОК");
-                }
+                    await DisplayAlert("Ошибка", $"Слово {eng} не найдено в словаре", "ОК");
+                }   
             }
         }
     }
