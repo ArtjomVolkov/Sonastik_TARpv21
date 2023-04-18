@@ -89,7 +89,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ico.ico" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sonastik_TARpv21\Sonastik_TARpv21.csproj">
       <Project>{EC305B0B-875D-4BCD-9457-87E3E0994A3D}</Project>
