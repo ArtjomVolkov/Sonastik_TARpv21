@@ -4,4 +4,4 @@ using Xamarin.Forms.Xaml;
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
 [assembly: ExportFont("AgentOrange.ttf", Alias = "AgentOrange")]
-[assembly: ExportFont("DynaPuff-VariableFont_wdth,wght.ttf", Alias = "DynaPuff")]
+[assembly: ExportFont("DynaPuff.ttf", Alias = "DynaPuff")]

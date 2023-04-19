@@ -66,9 +66,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\DynaPuff-VariableFont_wdth,wght.ttf" />
     <EmbeddedResource Include="Assets\AgentOrange.ttf" />
-    <EmbeddedResource Include="Assets\Fonts\AgentOrange.ttf" />
+    <EmbeddedResource Include="Assets\DynaPuff.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
@@ -90,9 +89,6 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ico.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Sonastik_TARpv21\Sonastik_TARpv21.csproj">
       <Project>{EC305B0B-875D-4BCD-9457-87E3E0994A3D}</Project>
       <Name>Sonastik_TARpv21</Name>
@@ -109,6 +105,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

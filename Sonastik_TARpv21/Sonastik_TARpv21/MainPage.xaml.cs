@@ -12,44 +12,45 @@ namespace Sonastik_TARpv21
 {
     public partial class MainPage : ContentPage
     {
-        Dictionary<string, string> dict = new Dictionary<string, string>();
+        Dictionary<string, string> dictionary = new Dictionary<string, string>();
         public MainPage()
         {
             InitializeComponent();
 
-            // загрузка слов из Preferences
+            // Загрузка слов из Preferences, если они там есть
             if (Preferences.ContainsKey("Dictionary"))
             {
                 string dictStr = Preferences.Get("Dictionary", "");
-                dict = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(dictStr);
+                dictionary = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(dictStr);
             }
         }
 
         // добавления слова
         private async void Insert_Dc(object sender, EventArgs e)
         {
-            string eng = await DisplayPromptAsync("Добавить слово", "Введите слово на английском языке");
+            string eng = await DisplayPromptAsync("Lisa sõna", "Sisestage sõna inglise keeles");
             if (eng == " ")
             {
-                await DisplayAlert("Ошибка", "Нельзя так! ", "ОК");
+                await DisplayAlert("Viga", "Sa ei saa seda teha!", "OK");
             }
             else if(eng == "")
             {
-                await DisplayAlert("Ошибка", "Нельзя так! ", "ОК");
+                await DisplayAlert("Viga", "Sa ei saa seda teha!", "OK");
             }
             else if (eng != null)
             {
-                string rus = await DisplayPromptAsync("Добавить слово", "Введите слово на русском языке");
-                if (rus != null)
+                string est = await DisplayPromptAsync("Lisa sõna", "Sisesta sõna eesti keeles");
+                if (est != null)
                 {
-                    if (!dict.ContainsKey(eng))
+                    // Проверка, что англ слово еще не добавлено в словарь
+                    if (!dictionary.ContainsKey(eng))
                     {
-                        dict.Add(eng, rus);
-                        await DisplayAlert("Успех", $"Слово {eng} добавлено в словарь", "ОК");
+                        dictionary.Add(eng, est);
+                        await DisplayAlert("Hästi", $"Sõna {eng} on sõnastikku lisatud", "OK");
                     }
                     else
                     {
-                        await DisplayAlert("Ошибка", $"Слово {eng} уже есть в словаре", "ОК");
+                        await DisplayAlert("Viga", $"Sõna {eng} on juba sõnastikus", "OK");
                     }
                 }
             }
@@ -58,15 +59,15 @@ namespace Sonastik_TARpv21
         // просмотр словаря
         private async void Start_Dc(object sender, EventArgs e)
         {
-            if (dict.Count > 0)
+            if (dictionary.Count > 0)
             {
                 CarouselPage carousel = new CarouselPage();
-                foreach (string key in dict.Keys)
+                foreach (string key in dictionary.Keys)
                 {
                     ContentPage content = new ContentPage();
                     Label lbl = new Label();
                     lbl.Text = key;
-                    lbl.FontSize = 40;
+                    lbl.FontSize = 50;
                     lbl.HorizontalOptions = LayoutOptions.Center;
                     lbl.VerticalOptions = LayoutOptions.Center;
                     lbl.GestureRecognizers.Add(new TapGestureRecognizer
@@ -74,16 +75,16 @@ namespace Sonastik_TARpv21
                         Command = new Command(() =>
                         {
                             string txt = lbl.Text;
-                            if (dict.ContainsKey(txt))
+                            if (dictionary.ContainsKey(txt))
                             {
-                                lbl.Text = dict[txt];
+                                lbl.Text = dictionary[txt];
                             }
                             else
                             {
-                                var reverse = dict.ToDictionary(x => x.Value, x => x.Key);
-                                if (reverse.ContainsKey(txt))
+                                var back = dictionary.ToDictionary(x => x.Value, x => x.Key);
+                                if (back.ContainsKey(txt))
                                 {
-                                    lbl.Text = reverse[txt];
+                                    lbl.Text = back[txt];
                                 }
                             }
                         })
@@ -91,29 +92,28 @@ namespace Sonastik_TARpv21
                     content.Content = lbl;
                     carousel.Children.Add(content);
                 }
-                carousel.Title = "Dictionary";
                 await Navigation.PushAsync(carousel);
             }
             else
             {
-                await DisplayAlert("Словарь пуст", "Добавьте слова в словарь", "ОК");
+                await DisplayAlert("Sõnastik on tühi", "Lisa sõnu sõnastikku", "OK");
             }
         }
 
         // удаления слова
         private async void Delete_Dc(object sender, EventArgs e)
         {
-            string eng = await DisplayPromptAsync("Удалить слово", "Введите слово на английском языке");
+            string eng = await DisplayPromptAsync("Kustuta sõna", "Sisestage sõna inglise keeles");
             if (eng != null)
             {
-                if (dict.ContainsKey(eng))
+                if (dictionary.ContainsKey(eng))
                 {
-                    dict.Remove(eng);
-                    await DisplayAlert("Успех", $"Слово {eng} удалено из словаря", "ОК");
+                    dictionary.Remove(eng);
+                    await DisplayAlert("Hästi", $"Sõna {eng} eemaldati sõnastikust", "OK");
                 }
                 else
                 {
-                    await DisplayAlert("Ошибка", $"Слово {eng} не найдено в словаре", "ОК");
+                    await DisplayAlert("Viga", $"Sõna {eng} ei leitud sõnastikust", "ОК");
                 }   
             }
         }
