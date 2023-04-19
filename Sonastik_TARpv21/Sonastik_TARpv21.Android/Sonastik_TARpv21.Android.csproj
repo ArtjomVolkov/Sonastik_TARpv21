@@ -66,8 +66,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Assets\AgentOrange.ttf" />
     <EmbeddedResource Include="Assets\DynaPuff.ttf" />
+    <AndroidAsset Include="Assets\AgentOrange.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
